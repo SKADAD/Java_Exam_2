@@ -1,7 +1,7 @@
-package controller;
+package Nawfall_src.controller;
 
-import model.CollectionOfUsers;
-import model.UserManager;
+import Nawfall_src.model.CollectionOfUsers;
+import Nawfall_src.model.UserManager;
 
 
 public class Controller {
@@ -31,6 +31,3 @@ public class Controller {
         return "not found";
     }
 }
-
-#en ny kommentar
-#och en till kommentar

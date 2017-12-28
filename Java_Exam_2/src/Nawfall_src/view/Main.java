@@ -1,6 +1,6 @@
-package view;
+package Nawfall_src.view;
 
-import controller.Controller;
+import Nawfall_src.controller.Controller;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
