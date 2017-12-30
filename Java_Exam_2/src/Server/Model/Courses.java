@@ -7,11 +7,10 @@ public class Courses {
     private String courseName;
     private String courseTeacher;
 
-    public Course(int courseID, String courseName, String courseTeacher){
+    public Courses(int courseID, String courseName, String courseTeacher){
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseTeacher = courseTeacher;
-
 
     }
 
@@ -19,23 +18,12 @@ public class Courses {
         return courseID;
     }
 
-    public void setCourseID(int courseID) {
-        this.courseID = courseID;
-    }
-
-    public java.lang.String getCourseName() {
+    public String getCourseName() {
         return courseName;
     }
 
-    public void setCourseName(java.lang.String courseName) {
-        this.courseName = courseName;
-    }
-
-    public java.lang.String getCourseTeacher() {
+    public String getCourseTeacher() {
         return courseTeacher;
     }
 
-    public void setCourseTeacher(java.lang.String courseTeacher) {
-        this.courseTeacher = courseTeacher;
-    }
 }
