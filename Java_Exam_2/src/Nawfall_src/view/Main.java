@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 
@@ -49,16 +50,82 @@ public class Main extends Application {
 
                 if(resultOfLogin){
                     //String nameOfUser = controller.getNameByEmail(email);
-                    Scene loginScene = new Scene(new Group(new Label("WELCOME "/*+nameOfUser*/)),200,100);
-                    Stage loginStage = new Stage();
-                    Button button = new Button("do something");
-                    button.setLayoutX(200);
-                    button.setLayoutY(100);
 
-                    loginStage.setScene(loginScene);
-                    loginStage.show();
+
+                    Button button1 = new Button();
+                    button1.setText("Show Your Classes");
+                    button1.setWrapText(true);
+                    button1.setMinSize(100, 50);
+                    button1.setOnAction(value -> {
+                        System.out.println("Blep bloop - Showing your classes");
+                    });
+
+                    Button button2 = new Button();
+                    button2.setText("Show All Classes");
+                    button2.setWrapText(true);
+                    button2.setMinSize(100, 50);
+                    button2.setOnAction(value -> {
+                        System.out.println("Blep bloop - Showing all classes");
+                    });
+
+                    Button button3 = new Button();
+                    button3.setText("Enroll To New Classes");
+                    button3.setWrapText(true);
+                    button3.setMinSize(100, 50);
+                    button3.setOnAction(value -> {
+                        System.out.println("Blep bloop - Enrolling to new classes");
+                    });
+
+                    Button button4 = new Button();
+                    button4.setText("Secret teacher Button");
+                    button4.setWrapText(true);
+                    button4.setMinSize(100, 50);
+                    button4.setOnAction(value -> {
+                        System.out.println("OOOoooOOoh - Is Teacher");
+                    });
+
+                    Button button5 = new Button();
+                    button5.setText("Secret Admin Button");
+                    button5.setWrapText(true);
+                    button5.setMinSize(100, 50);
+                    button5.setOnAction(value -> {
+                        System.out.println("OOOoooOOoh - Is Admin");
+                    });
+
+                    Button button6 = new Button();
+                    button6.setText("Add new courses");
+                    button6.setWrapText(true);
+                    button6.setMinSize(100, 50);
+                    button6.setOnAction(value -> {
+                        System.out.println("wow\n        amaze\n  very add\n     much course");
+                    });
+
+
+
+                    boolean isTeacher = false; //if user.isTeacher = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
+                    boolean isAdmin = false; // if user.isAdmin = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
+
+                    //sätter ihop knapparna och skapar scenen
+                    if (isAdmin == true) {
+                        HBox hbox = new HBox(button2,button6, button5);
+                        Scene scene = new Scene(hbox, 400, 150);
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                    } else if (isTeacher == true) {
+                        HBox hbox = new HBox(button1, button2, button4);
+                        Scene scene = new Scene(hbox, 400, 150);
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                    } else {
+                        HBox hbox = new HBox(button1, button2, button3);
+                        Scene scene = new Scene(hbox, 400, 150);
+                        primaryStage.setScene(scene);
+                        primaryStage.show();
+                    }
+
+
                 }else{
-                    Scene loginScene = new Scene(new Group(new Label("Try Again")),200,100);
+                    Scene loginScene = new Scene(new Group(new Label("Try Again")),500,500);
                     Stage loginStage = new Stage();
                     loginStage.setScene(loginScene);
                     loginStage.show();
