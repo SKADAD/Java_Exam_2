@@ -8,23 +8,19 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private ArrayList<String> courses;
     private Boolean isTeacher;
     private Boolean isAdmin;
 
 
 
-    public User(int userId,String name, String username, String password, String email, ArrayList<String> courses){
+    public User(int userId, String name, String username, String password, String email, Boolean is_teacher, Boolean is_admin){
         this.userId = userId;
         this.name = name;
-        this. username = username;
+        this.username = username;
         this.password = password;
         this.email = email;
-        this.courses = courses;
         this.isTeacher = false;
         this.isAdmin = false;
-
-
     }
 
     public int getUserId() {
@@ -67,14 +63,6 @@ public class User {
         this.email = email;
     }
 
-    public ArrayList<String> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(ArrayList<String> courses) {
-        this.courses = courses;
-    }
-
     public Boolean getTeacher() {
         return isTeacher;
     }
@@ -91,5 +79,3 @@ public class User {
         isAdmin = admin;
     }
 }
-
-
