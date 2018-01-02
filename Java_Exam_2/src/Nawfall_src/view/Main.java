@@ -45,12 +45,16 @@ public class Main extends Application {
             public void handle(Event event) {
                 String email = tf.getText();
                 String password = tf.getText();
-                boolean resultOfLogin = controller.tryLogin(email,password);
+                boolean resultOfLogin = true;//controller.tryLogin(email,password);
 
                 if(resultOfLogin){
-                    String nameOfUser = controller.getNameByEmail(email);
-                    Scene loginScene = new Scene(new Group(new Label("WELCOME "+nameOfUser)),200,100);
+                    //String nameOfUser = controller.getNameByEmail(email);
+                    Scene loginScene = new Scene(new Group(new Label("WELCOME "/*+nameOfUser*/)),200,100);
                     Stage loginStage = new Stage();
+                    Button button = new Button("do something");
+                    button.setLayoutX(200);
+                    button.setLayoutY(100);
+
                     loginStage.setScene(loginScene);
                     loginStage.show();
                 }else{

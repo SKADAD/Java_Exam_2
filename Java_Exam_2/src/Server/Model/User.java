@@ -23,6 +23,17 @@ public class User {
         this.isAdmin = false;
     }
 
+    public User(int userId, String name, String username, String password, String email, ArrayList<String> courses, Boolean isTeacher, Boolean isAdmin){
+        this.userId = userId;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.courses = courses;
+        this.isTeacher = isTeacher;
+        this.isAdmin = isAdmin;
+    }
+
     public int getUserId() {
         return userId;
     }
