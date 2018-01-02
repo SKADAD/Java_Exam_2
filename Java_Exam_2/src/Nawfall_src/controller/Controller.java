@@ -1,14 +1,14 @@
 package Nawfall_src.controller;
 
-import Nawfall_src.model.CollectionOfUsers;
-import Nawfall_src.model.UserManager;
+import Server.Model.CollectionOfUsers;
+import Nawfall_src.model.UserManagerDontUse;
 
 
 public class Controller {
     private CollectionOfUsers users;
 
-    public Controller() {
-        this.users = UserManager.getAllUsers();
+    public Controller() throws Exception {
+        this.users = UserManagerDontUse.getAllUsers();
         
     }
 

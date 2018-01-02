@@ -1,10 +1,10 @@
-package Nawfall_src.model;
+package Server.Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CollectionOfUsers implements Serializable{
-    private ArrayList<User> users;
+public class CollectionOfUsers{
+    public ArrayList<User> users;
 
     public CollectionOfUsers(ArrayList<User> users) {
         this.users = users;
