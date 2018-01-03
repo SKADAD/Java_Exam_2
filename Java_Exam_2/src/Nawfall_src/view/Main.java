@@ -1,6 +1,7 @@
 package Nawfall_src.view;
 
 import Nawfall_src.controller.Controller;
+import Nawfall_src.model.SocketClient;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -48,6 +49,9 @@ public class Main extends Application {
                 String password = tf.getText();
                 boolean resultOfLogin = true;//controller.tryLogin(email,password);
 
+                boolean isTeacher = false; //if user.isTeacher = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
+                boolean isAdmin = false; // if user.isAdmin = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
+
                 if(resultOfLogin){
                     //String nameOfUser = controller.getNameByEmail(email);
 
@@ -57,7 +61,8 @@ public class Main extends Application {
                     button1.setWrapText(true);
                     button1.setMinSize(100, 50);
                     button1.setOnAction(value -> {
-                        System.out.println("Blep bloop - Showing your classes");
+                        /*System.out.println("Blep bloop - Showing your classes")*/
+                        SocketClient socket = new SocketClient();
                     });
 
                     Button button2 = new Button();
@@ -101,27 +106,17 @@ public class Main extends Application {
                     });
 
 
-
-                    boolean isTeacher = false; //if user.isTeacher = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
-                    boolean isAdmin = false; // if user.isAdmin = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
-
-                    //sätter ihop knapparna och skapar scenen
-                    if (isAdmin == true) {
-                        HBox hbox = new HBox(button2,button6, button5);
-                        Scene scene = new Scene(hbox, 400, 150);
-                        primaryStage.setScene(scene);
-                        primaryStage.show();
-                    } else if (isTeacher == true) {
-                        HBox hbox = new HBox(button1, button2, button4);
-                        Scene scene = new Scene(hbox, 400, 150);
-                        primaryStage.setScene(scene);
-                        primaryStage.show();
+                    HBox hbox;
+                    if (isAdmin) {
+                         hbox = new HBox(button2,button6, button5);
+                    } else if (isTeacher) {
+                         hbox = new HBox(button1, button2, button4);
                     } else {
-                        HBox hbox = new HBox(button1, button2, button3);
-                        Scene scene = new Scene(hbox, 400, 150);
-                        primaryStage.setScene(scene);
-                        primaryStage.show();
+                         hbox = new HBox(button1, button2, button3);
                     }
+                    Scene scene = new Scene(hbox, 400, 150);
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
 
 
                 }else{
