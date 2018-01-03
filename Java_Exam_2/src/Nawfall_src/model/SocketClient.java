@@ -13,6 +13,11 @@ import java.util.Scanner;
 public class SocketClient {
 
     public static void main(String args[]) throws IOException {
+        simpleMessage();
+
+    }
+
+    public static void simpleMessage() throws IOException {
         String inputCommand, temp;
         Scanner sc = new Scanner(System.in);
         Socket s = new Socket("127.0.0.1", 9999);

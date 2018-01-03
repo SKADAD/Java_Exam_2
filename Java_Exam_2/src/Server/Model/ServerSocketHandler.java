@@ -10,17 +10,19 @@ public class ServerSocketHandler {
 
     public static void main(String args[]) throws IOException {
 
-        String inputCommand, output;
-        ServerSocket s1 = new ServerSocket(9999);
-        Socket ss = s1.accept();
-        Scanner sc = new Scanner(ss.getInputStream());
-        inputCommand = sc.nextLine();
 
-        output = inputCommand;
+            String inputCommand, output;
+            ServerSocket s1 = new ServerSocket(9999);
+        while(true) {
+            Socket ss = s1.accept();
+            Scanner sc = new Scanner(ss.getInputStream());
+            inputCommand = sc.nextLine();
 
-        PrintStream p = new PrintStream(ss.getOutputStream());
-        p.println(output);
+            output = inputCommand;
 
+            PrintStream p = new PrintStream(ss.getOutputStream());
+            p.println(output);
+        }
 
     }
 

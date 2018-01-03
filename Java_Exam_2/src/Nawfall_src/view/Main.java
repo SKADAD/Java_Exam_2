@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class Main extends Application {
     private Controller controller;
@@ -63,6 +65,13 @@ public class Main extends Application {
                     button1.setOnAction(value -> {
                         /*System.out.println("Blep bloop - Showing your classes")*/
                         SocketClient socket = new SocketClient();
+                        try {
+                            socket.simpleMessage();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+
                     });
 
                     Button button2 = new Button();
