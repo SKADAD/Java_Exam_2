@@ -9,8 +9,13 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -52,10 +57,12 @@ public class Main extends Application {
                 boolean resultOfLogin = true;//controller.tryLogin(email,password);
 
                 boolean isTeacher = false; //if user.isTeacher = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
-                boolean isAdmin = false; // if user.isAdmin = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
+                boolean isAdmin = true; // if user.isAdmin = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
 
                 if(resultOfLogin){
                     //String nameOfUser = controller.getNameByEmail(email);
+
+
 
 
                     Button button1 = new Button();
@@ -63,15 +70,7 @@ public class Main extends Application {
                     button1.setWrapText(true);
                     button1.setMinSize(100, 50);
                     button1.setOnAction(value -> {
-                        /*System.out.println("Blep bloop - Showing your classes")*/
-                        SocketClient socket = new SocketClient();
-                        try {
-                            socket.simpleMessage();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-
+                        showYourClasses();
                     });
 
                     Button button2 = new Button();
@@ -79,7 +78,7 @@ public class Main extends Application {
                     button2.setWrapText(true);
                     button2.setMinSize(100, 50);
                     button2.setOnAction(value -> {
-                        System.out.println("Blep bloop - Showing all classes");
+                        showAllClasses();
                     });
 
                     Button button3 = new Button();
@@ -87,7 +86,7 @@ public class Main extends Application {
                     button3.setWrapText(true);
                     button3.setMinSize(100, 50);
                     button3.setOnAction(value -> {
-                        System.out.println("Blep bloop - Enrolling to new classes");
+                        enrollNewCLass();
                     });
 
                     Button button4 = new Button();
@@ -103,7 +102,7 @@ public class Main extends Application {
                     button5.setWrapText(true);
                     button5.setMinSize(100, 50);
                     button5.setOnAction(value -> {
-                        System.out.println("OOOoooOOoh - Is Admin");
+                        System.out.println("wow\n        amaze\n  very add\n     much course");
                     });
 
                     Button button6 = new Button();
@@ -111,7 +110,7 @@ public class Main extends Application {
                     button6.setWrapText(true);
                     button6.setMinSize(100, 50);
                     button6.setOnAction(value -> {
-                        System.out.println("wow\n        amaze\n  very add\n     much course");
+                        addNewCourse();
                     });
 
 
@@ -153,4 +152,82 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    public void showYourClasses(){
+
+            String var1 ="KlassNamn"; //namn är endast placeholder ska bytas till variabel
+
+            GridPane gridpane = new GridPane();
+
+            TextField tx1 = new TextField(var1);
+            tx1.setDisable(true);
+            gridpane.add(tx1,1,0);
+
+
+            Scene buttonScene = new Scene(gridpane, 500, 500);
+            Stage buttonStage = new Stage();
+            buttonStage.setScene(buttonScene);
+            buttonStage.show();
+    }
+
+    public void showAllClasses(){
+
+        String var1 ="KlassNamn"; //namn är endast placeholder ska bytas till variabel
+
+        GridPane gridpane = new GridPane();
+
+        TextField tx1 = new TextField(var1);
+        tx1.setDisable(true);
+        gridpane.add(tx1,1,0);
+
+
+        Scene buttonScene = new Scene(gridpane, 500, 500);
+        Stage buttonStage = new Stage();
+        buttonStage.setScene(buttonScene);
+        buttonStage.show();
+    }
+
+    public void enrollNewCLass(){
+        String var1 ="KlassNamn"; //namn är endast placeholder ska bytas till variabel
+        String var2 ="Teacher"; //namn är endast placeholder ska bytas till variabel
+
+        GridPane gridpane = new GridPane();
+
+        TextField tx1 = new TextField(var1);
+        gridpane.add(tx1,1,0);
+
+        TextField tx2 = new TextField(var2);
+        gridpane.add(tx2,2,0);
+
+        Scene buttonScene = new Scene(gridpane, 500, 500);
+        Stage buttonStage = new Stage();
+        buttonStage.setScene(buttonScene);
+        buttonStage.show();
+
+    }
+
+    public void addNewCourse(){
+        String var1 ="KlassNamn"; //namn är endast placeholder ska bytas till variabel
+        String var2 ="Teacher"; //namn är endast placeholder ska bytas till variabel
+        String var3 ="ClassCode"; //namn är endast placeholder ska bytas till variabel
+
+        GridPane gridpane = new GridPane();
+
+        TextField tx1 = new TextField(var1);
+        gridpane.add(tx1,1,0);
+
+        TextField tx2 = new TextField(var2);
+        gridpane.add(tx2,2,0);
+
+
+        TextField tx3 = new TextField(var3);
+        gridpane.add(tx3,3,0);
+
+        Scene buttonScene = new Scene(gridpane, 500, 500);
+        Stage buttonStage = new Stage();
+        buttonStage.setScene(buttonScene);
+        buttonStage.show();
+    }
 }
+
+
