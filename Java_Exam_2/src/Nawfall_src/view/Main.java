@@ -175,12 +175,30 @@ public static ArrayList[] emailsAndPasswords;
 
             GridPane gridpane = new GridPane();
 
-            TextField tx1 = new TextField(var1);
-            tx1.setDisable(true);
-            gridpane.add(tx1,1,0);
+            int lenArrayName = course_name.size();
+            int lenArrayId = course_id.size();
+            int lenArrayTeacher = teacher_id.size();
+
+            for (int i = 0; i < lenArrayName; i++){
+                TextField tx1 = new TextField(String.valueOf(course_id.get(i)));
+                tx1.setDisable(true);
+                gridpane.add(tx1,i+1,1);
+            }
+
+            for (int i = 0; i < lenArrayId; i++){
+                TextField tx1 = new TextField(String.valueOf(course_id.get(i)));
+                tx1.setDisable(true);
+                gridpane.add(tx1,i+1,0);
+        }
+            for (int i = 0; i < lenArrayTeacher; i++){
+                TextField tx1 = new TextField(String.valueOf(teacher_id.get(i)));
+                tx1.setDisable(true);
+                gridpane.add(tx1,i+1,2);
+        }
 
 
-            Scene buttonScene = new Scene(gridpane, 500, 500);
+
+            Scene buttonScene = new Scene(gridpane, 500, 1000);
             Stage buttonStage = new Stage();
             buttonStage.setScene(buttonScene);
             buttonStage.show();
