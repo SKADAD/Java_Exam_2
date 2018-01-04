@@ -1,6 +1,6 @@
-package Nawfall_src.controller;
+package Client.controller;
 
-import Nawfall_src.view.Main;
+import Client.view.Main;
 import Server.Model.CollectionOfUsers;
 
 import java.util.ArrayList;
@@ -30,11 +30,13 @@ public class Controller {
         ArrayList[] idEmailsAndPassword = Main.emailsAndPasswords;
         ArrayList<Integer> ids = idEmailsAndPassword[0];
         ArrayList<String> emails = idEmailsAndPassword[1];
+        int indexOfEmail = 0;
         for(int i=0;i<ids.size();i++){
-            System.out.println(ids.get(i));
-            System.out.println(emails.get(i));
-            if(ids.get(i).equals(emails.get(i))){
-                return ids.get(i);
+            if(email.equals(emails.get(i))){
+                indexOfEmail = i;
+
+                int idToReturn = ids.get(indexOfEmail);
+                return idToReturn;
             }
         }
         return null;

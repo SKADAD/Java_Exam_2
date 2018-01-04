@@ -1,6 +1,4 @@
-package Nawfall_src.Database;
-
-import Nawfall_src.Database.Connection_to_db;
+package Server.Model.Database_Controller;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -1,4 +1,4 @@
-package Nawfall_src.model;
+package Client.model;
 
 //OBSERVERA DETTA ÄR ENDAST ETT EXEMPEL FÖR SIMPELT JAVA SOCKET PROGRAM
 //Länk till yt video: https://www.youtube.com/watch?v=vCDrGJWqR8w
@@ -33,10 +33,17 @@ public class SocketClient {
         System.out.println(temp);
 
     }
-
+    public static Socket clientSocket;
+    public static void initSocket(){
+        try {
+            clientSocket = connect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static ArrayList[] loginSocket() throws IOException, ClassNotFoundException {
-        Socket clientSocket = connect();
+
         ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
         ArrayList<Integer> ids = (ArrayList<Integer>) ois.readObject();
         ArrayList<String> emails = (ArrayList<String>) ois.readObject();
@@ -48,12 +55,13 @@ public class SocketClient {
         return idEmailsAndPasswords;
     }
 
-    public static ArrayList[] sendMessageToServer(ArrayList<Integer> toSend) throws IOException {
-        Socket clientSocket = connect();
+    public static ArrayList[] sendMessageToServer(ArrayList<Integer> toSend) throws IOException, ClassNotFoundException {
+
         ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
         outputStream.writeObject(toSend);
         ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
         ArrayList[] fromTheServer = new ArrayList[3];
+        fromTheServer= (ArrayList[]) objectInputStream.readObject();
         return fromTheServer;
     }
 

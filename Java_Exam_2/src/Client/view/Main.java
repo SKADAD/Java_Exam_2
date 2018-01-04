@@ -1,7 +1,7 @@
-package Nawfall_src.view;
+package Client.view;
 
-import Nawfall_src.controller.Controller;
-import Nawfall_src.model.SocketClient;
+import Client.controller.Controller;
+import Client.model.SocketClient;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -9,17 +9,12 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -60,7 +55,7 @@ public class Main extends Application {
                 boolean resultOfLogin = controller.tryLogin(email,password);
 
                 boolean isTeacher = false; //if user.isTeacher = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
-                boolean isAdmin = true; // if user.isAdmin = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
+                boolean isAdmin = false; // if user.isAdmin = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
 
                 if(resultOfLogin){
                     int idOfUser = controller.getidfrommail(email);
@@ -73,7 +68,13 @@ public class Main extends Application {
                     button1.setWrapText(true);
                     button1.setMinSize(100, 50);
                     button1.setOnAction(value -> {
-                        showYourClasses(idOfUser);
+                        try {
+                            showYourClasses(idOfUser);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     });
 
                     Button button2 = new Button();
@@ -154,16 +155,15 @@ public class Main extends Application {
 public static ArrayList[] emailsAndPasswords;
     public static void main(String[] args) {
         try {
+            SocketClient.initSocket();
             emailsAndPasswords = SocketClient.loginSocket();
             launch(args);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void showYourClasses(int id) throws IOException {
+    public void showYourClasses(int id) throws IOException, ClassNotFoundException {
             ArrayList<Integer> toTheServer = new ArrayList<>();
             toTheServer.add(1);
             toTheServer.add(id);
@@ -171,7 +171,6 @@ public static ArrayList[] emailsAndPasswords;
             ArrayList<Integer> course_id = fromTheServer[0];
             ArrayList<String> course_name = fromTheServer[1];
             ArrayList<Integer> teacher_id = fromTheServer[2];
-            String var1 ="KlassNamn"; //namn är endast placeholder ska bytas till variabel
 
             GridPane gridpane = new GridPane();
 
@@ -180,25 +179,36 @@ public static ArrayList[] emailsAndPasswords;
             int lenArrayTeacher = teacher_id.size();
 
             for (int i = 0; i < lenArrayName; i++){
-                TextField tx1 = new TextField(String.valueOf(course_id.get(i)));
+                TextField tx1 = new TextField(String.valueOf(course_name.get(i)));
                 tx1.setDisable(true);
-                gridpane.add(tx1,i+1,1);
+                gridpane.add(tx1,1,i+2);
             }
 
             for (int i = 0; i < lenArrayId; i++){
                 TextField tx1 = new TextField(String.valueOf(course_id.get(i)));
                 tx1.setDisable(true);
-                gridpane.add(tx1,i+1,0);
+                gridpane.add(tx1,0,i+2);
         }
             for (int i = 0; i < lenArrayTeacher; i++){
                 TextField tx1 = new TextField(String.valueOf(teacher_id.get(i)));
                 tx1.setDisable(true);
-                gridpane.add(tx1,i+1,2);
+                gridpane.add(tx1,2,i+2);
         }
 
 
+            TextField courseId = new TextField("Course ID");
+            TextField name = new TextField("Course Name");
+            TextField teacherId = new TextField("Teacher ID");
 
-            Scene buttonScene = new Scene(gridpane, 500, 1000);
+            courseId.setDisable(true);
+            name.setDisable(true);
+            teacherId.setDisable(true);
+
+            gridpane.add(courseId,0,0);
+            gridpane.add(name,1,0);
+            gridpane.add(teacherId,2,0);
+
+            Scene buttonScene = new Scene(gridpane, 500, 200);
             Stage buttonStage = new Stage();
             buttonStage.setScene(buttonScene);
             buttonStage.show();
