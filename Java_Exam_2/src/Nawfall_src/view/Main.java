@@ -19,6 +19,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 public class Main extends Application {
@@ -54,14 +56,14 @@ public class Main extends Application {
             @Override
             public void handle(Event event) {
                 String email = tf.getText();
-                String password = tf.getText();
+                String password = tf2.getText();
                 boolean resultOfLogin = controller.tryLogin(email,password);
 
                 boolean isTeacher = false; //if user.isTeacher = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
                 boolean isAdmin = true; // if user.isAdmin = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
 
                 if(resultOfLogin){
-                    //String nameOfUser = controller.getNameByEmail(email);
+                    int idOfUser = controller.getidfrommail(email);
 
 
 
@@ -71,7 +73,7 @@ public class Main extends Application {
                     button1.setWrapText(true);
                     button1.setMinSize(100, 50);
                     button1.setOnAction(value -> {
-                        showYourClasses();
+                        showYourClasses(idOfUser);
                     });
 
                     Button button2 = new Button();
@@ -149,13 +151,26 @@ public class Main extends Application {
 
         primaryStage.show();
     }
-
+public static ArrayList[] emailsAndPasswords;
     public static void main(String[] args) {
-        launch(args);
+        try {
+            emailsAndPasswords = SocketClient.loginSocket();
+            launch(args);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void showYourClasses(){
-
+    public void showYourClasses(int id) throws IOException {
+            ArrayList<Integer> toTheServer = new ArrayList<>();
+            toTheServer.add(1);
+            toTheServer.add(id);
+            ArrayList[] fromTheServer = SocketClient.sendMessageToServer(toTheServer);
+            ArrayList<Integer> course_id = fromTheServer[0];
+            ArrayList<String> course_name = fromTheServer[1];
+            ArrayList<Integer> teacher_id = fromTheServer[2];
             String var1 ="KlassNamn"; //namn är endast placeholder ska bytas till variabel
 
             GridPane gridpane = new GridPane();

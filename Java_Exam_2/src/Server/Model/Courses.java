@@ -5,9 +5,9 @@ public class Courses {
 
     private int courseID;
     private String courseName;
-    private String courseTeacher;
+    private int courseTeacher;
 
-    public Courses(int courseID, String courseName, String courseTeacher){
+    public Courses(int courseID, String courseName, int courseTeacher){
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseTeacher = courseTeacher;
@@ -22,7 +22,7 @@ public class Courses {
         return courseName;
     }
 
-    public String getCourseTeacher() {
+    public int getCourseTeacher() {
         return courseTeacher;
     }
 

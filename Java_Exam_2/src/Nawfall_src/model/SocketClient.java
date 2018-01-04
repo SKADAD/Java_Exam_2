@@ -6,6 +6,7 @@ package Nawfall_src.model;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -34,26 +35,30 @@ public class SocketClient {
     }
 
 
-    public static ArrayList[] loginSocket() throws IOException {
+    public static ArrayList[] loginSocket() throws IOException, ClassNotFoundException {
         Socket clientSocket = connect();
         ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
-        try {
-            ArrayList<String> emails = (ArrayList<String>) ois.readObject();
-            ArrayList<String> passwords = (ArrayList<String>) ois.readObject();
-            ArrayList[] emailsAndPasswords = new ArrayList[2];
-            emailsAndPasswords[0] = emails;
-            emailsAndPasswords[1] = passwords;
-            return emailsAndPasswords;
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        ArrayList<Integer> ids = (ArrayList<Integer>) ois.readObject();
+        ArrayList<String> emails = (ArrayList<String>) ois.readObject();
+        ArrayList<String> passwords = (ArrayList<String>) ois.readObject();
+        ArrayList[] idEmailsAndPasswords = new ArrayList[3];
+        idEmailsAndPasswords[0] = ids;
+        idEmailsAndPasswords[1] = emails;
+        idEmailsAndPasswords[2] = passwords;
+        return idEmailsAndPasswords;
     }
 
-    private static Socket connect() throws IOException {
-        Socket s = new Socket("127.0.0.1", 9999);
-        return s;
+    public static ArrayList[] sendMessageToServer(ArrayList<Integer> toSend) throws IOException {
+        Socket clientSocket = connect();
+        ObjectOutputStream outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+        outputStream.writeObject(toSend);
+        ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
+        ArrayList[] fromTheServer = new ArrayList[3];
+        return fromTheServer;
+    }
+
+    public static Socket connect() throws IOException {
+        Socket socket = new Socket("127.0.0.1", 9999);
+        return socket;
     }
 }
