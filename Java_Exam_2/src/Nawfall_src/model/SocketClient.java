@@ -5,15 +5,17 @@ package Nawfall_src.model;
 //Client programmet!!!
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SocketClient {
 
     public static void main(String args[]) throws IOException {
-        simpleMessage();
+        //simpleMessage();
+        loginSocket();
 
     }
 
@@ -31,4 +33,16 @@ public class SocketClient {
 
     }
 
+
+    public static void loginSocket() throws IOException, ClassNotFoundException {
+        Socket connct = connect();
+        ObjectInputStream ois = new ObjectInputStream(connct.getInputStream());
+        ArrayList<String> emails = (ArrayList<String>) ois.readObject();
+        ArrayList<String> password = (ArrayList<String>) ois.readObject();
+    }
+
+    public static Socket connect() throws IOException {
+        Socket s = new Socket("127.0.0.1", 9999);
+        return s;
+    }
 }
