@@ -13,11 +13,11 @@ import java.util.Scanner;
 
 public class SocketClient {
 
-    public static void main(String args[]) throws IOException {
+    /*public static void main(String args[]) throws IOException {
         //simpleMessage();
         loginSocket();
 
-    }
+    }*/
 
     public static void simpleMessage() throws IOException {
         String inputCommand, temp;
@@ -34,14 +34,25 @@ public class SocketClient {
     }
 
 
-    public static void loginSocket() throws IOException, ClassNotFoundException {
-        Socket connct = connect();
-        ObjectInputStream ois = new ObjectInputStream(connct.getInputStream());
-        ArrayList<String> emails = (ArrayList<String>) ois.readObject();
-        ArrayList<String> password = (ArrayList<String>) ois.readObject();
+    public static ArrayList[] loginSocket() throws IOException {
+        Socket clientSocket = connect();
+        ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
+        try {
+            ArrayList<String> emails = (ArrayList<String>) ois.readObject();
+            ArrayList<String> passwords = (ArrayList<String>) ois.readObject();
+            ArrayList[] emailsAndPasswords = new ArrayList[2];
+            emailsAndPasswords[0] = emails;
+            emailsAndPasswords[1] = passwords;
+            return emailsAndPasswords;
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
-    public static Socket connect() throws IOException {
+    private static Socket connect() throws IOException {
         Socket s = new Socket("127.0.0.1", 9999);
         return s;
     }

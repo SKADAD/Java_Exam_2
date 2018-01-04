@@ -32,6 +32,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 275));
 
         */
+
         controller = new Controller();
         Label label = new Label("email");
         label.setLayoutX(100);
@@ -54,7 +55,7 @@ public class Main extends Application {
             public void handle(Event event) {
                 String email = tf.getText();
                 String password = tf.getText();
-                boolean resultOfLogin = true;//controller.tryLogin(email,password);
+                boolean resultOfLogin = controller.tryLogin(email,password);
 
                 boolean isTeacher = false; //if user.isTeacher = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm
                 boolean isAdmin = true; // if user.isAdmin = true/false osv - Dessa ska flyttas högre upp men är här nere för att testas atm

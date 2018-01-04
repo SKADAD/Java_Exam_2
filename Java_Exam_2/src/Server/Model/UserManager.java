@@ -6,9 +6,17 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class UserManager {
+    static Connection conn;
 
-    public void getAllUsers() throws Exception {
-        Connection conn = Connection_to_db.getConnection();
+    {
+        try {
+            conn = Connection_to_db.getConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static CollectionOfUsers getAllUsers() throws Exception {
         Statement stmt = conn.createStatement();
         String sql = "SELECT * FROM [User]";
         ResultSet result = stmt.executeQuery(sql);
@@ -24,11 +32,11 @@ public class UserManager {
             User user = new User(id,name,username,password,email,is_teacher,is_admin);
             users.addUser(user);
         } result.close();
+        return users;
     }
 
     public void saveUsers(CollectionOfUsers collection) throws Exception{
         ArrayList<User> users = collection.users;
-        Connection conn = Connection_to_db.getConnection();
         for(int i = 0; i<users.size(); i++){
             int id = users.get(i).getUserId();
             String name = users.get(i).getName();
